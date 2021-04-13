@@ -1,0 +1,70 @@
+Bug/Issue Tracking System
+
+Bugs
+- BugId, bug_developer_id, bug_tester_id, bug_title, bug_type, bug_description
+Projects
+- project_id, project_developer_id, project_teter_id, project_name, project_date, project_description
+Manager
+Developer
+Tester
+BugType
+========================
+
+Task Manager
+
+Developer
+Manager
+
+Task
+- task_id
+- task_title
+- task_desc
+- task_date
+- task_assign
+- task_status
+
+
+
+
+
+Admin
+- id, name, emp_id
+Manager
+- id, name, emp_id, task_id
+Employee
+- emp_id, emp_name, task_id
+Task
+- task_id, task_name, assign_date, completion_date, task_desc
+Rewards
+- emp_id, task_id, grade, incentive
+
+
+
+
+
+
+Admin
+- Id, name, Emp_id
+Manager
+- Id, name, Emp_id, task_id
+Task
+- Task_id, name, desc, task_assign_date, task_complete_date, expected_date, completion_duration, reward;
+Emp
+- Emp_id, Emp_name, Emp_desig, Emp_sal
+Rating
+- Emp_id, Rating, Incentive
+
+Completion Duration...
+update task set completion_duration = datediff(task_assign_date, task_complete_date));
+
+update task set reward = if(completion_duration = datediff(task_assign_date, task_expect_date)), 'A', 'B')
+
+PL/SQL
+Begin
+if completion_duration = datediff(task_assign_date, task_expect_date) then set reward = 5000;
+elseif completion_duration > datediff(task_assign_date, task_expect_date) then set reward = 3000;
+elseif completion_duration < datediff(task_assign_date, task_expect_date) then set reward = 7000;
+else set reward = 0;
+end if;
+end;
+

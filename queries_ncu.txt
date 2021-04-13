@@ -1,0 +1,785 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bmpl_db            |
+| cisco              |
+| information_schema |
+| mydb_1             |
+| mysql              |
+| onlineshoppingdb   |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.03 sec)
+
+mysql> create database ncu_db;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use ncu_db;
+Database changed
+mysql> create table if not exists bugs (bug_id int not null, bug_developer_id int not nul, bug_tester_id int not null, title varchar(255), type varchar(255), description varchar(255));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'nul, bug_tester_id int not null, title varchar(255), type varchar(255), descript' at line 1
+mysql> create table if not exists bugs (bug_id int not null, bug_developer_id int not null, bug_tester_id int not null, title varchar(255), type varchar(255), description varchar(255));
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc bugs;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| bug_id           | int          | NO   |     | NULL    |       |
+| bug_developer_id | int          | NO   |     | NULL    |       |
+| bug_tester_id    | int          | NO   |     | NULL    |       |
+| title            | varchar(255) | YES  |     | NULL    |       |
+| type             | varchar(255) | YES  |     | NULL    |       |
+| description      | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> create table if not exists projects (project_id int not null, project_developer_id int not null, project_tester_id int not null, project_name varchar(255), project_date date, project_type varchar(255), project_desc varchar(255));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc projects;
++----------------------+--------------+------+-----+---------+-------+
+| Field                | Type         | Null | Key | Default | Extra |
++----------------------+--------------+------+-----+---------+-------+
+| project_id           | int          | NO   |     | NULL    |       |
+| project_developer_id | int          | NO   |     | NULL    |       |
+| project_tester_id    | int          | NO   |     | NULL    |       |
+| project_name         | varchar(255) | YES  |     | NULL    |       |
+| project_date         | date         | YES  |     | NULL    |       |
+| project_type         | varchar(255) | YES  |     | NULL    |       |
+| project_desc         | varchar(255) | YES  |     | NULL    |       |
++----------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table if not exists testers (tester_id int not null, tester_name varchar(255), tester_email varchar(255), tester_password varchar(255));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> create table if not exists developers (developer_id int not null, developer_name varchar(255), developer_email varchar(255), developer_password varchar(255));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> alter table bugs add primary key(bug_id);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table projects add primary key(project_id);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table testers add primary key(tester_id);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table developers add primary key(developer_id);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc bugs;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| bug_id           | int          | NO   | PRI | NULL    |       |
+| bug_developer_id | int          | NO   |     | NULL    |       |
+| bug_tester_id    | int          | NO   |     | NULL    |       |
+| title            | varchar(255) | YES  |     | NULL    |       |
+| type             | varchar(255) | YES  |     | NULL    |       |
+| description      | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> desc projects;
++----------------------+--------------+------+-----+---------+-------+
+| Field                | Type         | Null | Key | Default | Extra |
++----------------------+--------------+------+-----+---------+-------+
+| project_id           | int          | NO   | PRI | NULL    |       |
+| project_developer_id | int          | NO   |     | NULL    |       |
+| project_tester_id    | int          | NO   |     | NULL    |       |
+| project_name         | varchar(255) | YES  |     | NULL    |       |
+| project_date         | date         | YES  |     | NULL    |       |
+| project_type         | varchar(255) | YES  |     | NULL    |       |
+| project_desc         | varchar(255) | YES  |     | NULL    |       |
++----------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc testers;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| tester_id       | int          | NO   | PRI | NULL    |       |
+| tester_name     | varchar(255) | YES  |     | NULL    |       |
+| tester_email    | varchar(255) | YES  |     | NULL    |       |
+| tester_password | varchar(255) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc developers;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| developer_id       | int          | NO   | PRI | NULL    |       |
+| developer_name     | varchar(255) | YES  |     | NULL    |       |
+| developer_email    | varchar(255) | YES  |     | NULL    |       |
+| developer_password | varchar(255) | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table bugs add foreign key(bug_developer_id) references developers(developer_id);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table bugs add foreign key(bug_tester_id) references testers(tester_id);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table projects add foreign key(project_developer_id) references developers(developer_id);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table projects add foreign key(project_tester_id) references testers(tester_id);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc bugs;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| bug_id           | int          | NO   | PRI | NULL    |       |
+| bug_developer_id | int          | NO   | MUL | NULL    |       |
+| bug_tester_id    | int          | NO   | MUL | NULL    |       |
+| title            | varchar(255) | YES  |     | NULL    |       |
+| type             | varchar(255) | YES  |     | NULL    |       |
+| description      | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc projects;
++----------------------+--------------+------+-----+---------+-------+
+| Field                | Type         | Null | Key | Default | Extra |
++----------------------+--------------+------+-----+---------+-------+
+| project_id           | int          | NO   | PRI | NULL    |       |
+| project_developer_id | int          | NO   | MUL | NULL    |       |
+| project_tester_id    | int          | NO   | MUL | NULL    |       |
+| project_name         | varchar(255) | YES  |     | NULL    |       |
+| project_date         | date         | YES  |     | NULL    |       |
+| project_type         | varchar(255) | YES  |     | NULL    |       |
+| project_desc         | varchar(255) | YES  |     | NULL    |       |
++----------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into developers values (101,'Aman','aman12@gmail.com','12345');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into developers values (102,'Kunal','kunalsharma2@gmail.com','abc12345');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into developers values (103,'John','johndoe@gmail.com','abc_john');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into testers values (1001,'Mahesh','mahesh12@gmail.com','12345');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into testers values (1002,'Pooja','pooja_sharma@gmail.com','puja12345');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into testers values (1003,'Akshay','akshay_tyagi@gmail.com','12345xyz');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from developers;
++--------------+----------------+------------------------+--------------------+
+| developer_id | developer_name | developer_email        | developer_password |
++--------------+----------------+------------------------+--------------------+
+|          101 | Aman           | aman12@gmail.com       | 12345              |
+|          102 | Kunal          | kunalsharma2@gmail.com | abc12345           |
+|          103 | John           | johndoe@gmail.com      | abc_john           |
++--------------+----------------+------------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from testers;
++-----------+-------------+------------------------+-----------------+
+| tester_id | tester_name | tester_email           | tester_password |
++-----------+-------------+------------------------+-----------------+
+|      1001 | Mahesh      | mahesh12@gmail.com     | 12345           |
+|      1002 | Pooja       | pooja_sharma@gmail.com | puja12345       |
+|      1003 | Akshay      | akshay_tyagi@gmail.com | 12345xyz        |
++-----------+-------------+------------------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc projects;
++----------------------+--------------+------+-----+---------+-------+
+| Field                | Type         | Null | Key | Default | Extra |
++----------------------+--------------+------+-----+---------+-------+
+| project_id           | int          | NO   | PRI | NULL    |       |
+| project_developer_id | int          | NO   | MUL | NULL    |       |
+| project_tester_id    | int          | NO   | MUL | NULL    |       |
+| project_name         | varchar(255) | YES  |     | NULL    |       |
+| project_date         | date         | YES  |     | NULL    |       |
+| project_type         | varchar(255) | YES  |     | NULL    |       |
+| project_desc         | varchar(255) | YES  |     | NULL    |       |
++----------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> insert into projects values (1, 101, 1002, 'Test Engine', '2021-4-4', '', 'Test Engine for xyz');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into projects values (2, 102, 1001, 'Task Manager', '2021-5-4', '', 'Task Manager for managing task');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into projects values (3, 102, 1001, 'LMS', '2021-2-4', '', 'Loan Management System for xyz bank');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into projects values (4, 103, 1003, 'Online Shopping', '2021-2-2', '', 'Online Shopping Web App');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from projects;
++------------+----------------------+-------------------+-----------------+--------------+--------------+-------------------------------------+
+| project_id | project_developer_id | project_tester_id | project_name    | project_date | project_type | project_desc                        |
++------------+----------------------+-------------------+-----------------+--------------+--------------+-------------------------------------+
+|          1 |                  101 |              1002 | Test Engine     | 2021-04-04   |              | Test Engine for xyz                 |
+|          2 |                  102 |              1001 | Task Manager    | 2021-05-04   |              | Task Manager for managing task      |
+|          3 |                  102 |              1001 | LMS             | 2021-02-04   |              | Loan Management System for xyz bank |
+|          4 |                  103 |              1003 | Online Shopping | 2021-02-02   |              | Online Shopping Web App             |
++------------+----------------------+-------------------+-----------------+--------------+--------------+-------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from developers;
++--------------+----------------+------------------------+--------------------+
+| developer_id | developer_name | developer_email        | developer_password |
++--------------+----------------+------------------------+--------------------+
+|          101 | Aman           | aman12@gmail.com       | 12345              |
+|          102 | Kunal          | kunalsharma2@gmail.com | abc12345           |
+|          103 | John           | johndoe@gmail.com      | abc_john           |
++--------------+----------------+------------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from testers;
++-----------+-------------+------------------------+-----------------+
+| tester_id | tester_name | tester_email           | tester_password |
++-----------+-------------+------------------------+-----------------+
+|      1001 | Mahesh      | mahesh12@gmail.com     | 12345           |
+|      1002 | Pooja       | pooja_sharma@gmail.com | puja12345       |
+|      1003 | Akshay      | akshay_tyagi@gmail.com | 12345xyz        |
++-----------+-------------+------------------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select p.project_name, p.project_date, d.developer_name from projects p inner join developers d on p.project_developer_id = d.developer_id;
++-----------------+--------------+----------------+
+| project_name    | project_date | developer_name |
++-----------------+--------------+----------------+
+| Test Engine     | 2021-04-04   | Aman           |
+| Task Manager    | 2021-05-04   | Kunal          |
+| LMS             | 2021-02-04   | Kunal          |
+| Online Shopping | 2021-02-02   | John           |
++-----------------+--------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select p.project_name, p.project_date, d.developer_name from projects p inner join developers d on p.project_developer_id = d.developer_id where p.project_name = 'test engine';
++--------------+--------------+----------------+
+| project_name | project_date | developer_name |
++--------------+--------------+----------------+
+| Test Engine  | 2021-04-04   | Aman           |
++--------------+--------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select p.project_name, p.project_date, d.developer_name, t.tester_name from projects p inner join developers d on p.project_developer_id = d.developer_id inner join testers t on p.project_tester_id = t.tester_id  where p.project_name = 'test engine';
++--------------+--------------+----------------+-------------+
+| project_name | project_date | developer_name | tester_name |
++--------------+--------------+----------------+-------------+
+| Test Engine  | 2021-04-04   | Aman           | Pooja       |
++--------------+--------------+----------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> desc bugs;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| bug_id           | int          | NO   | PRI | NULL    |       |
+| bug_developer_id | int          | NO   | MUL | NULL    |       |
+| bug_tester_id    | int          | NO   | MUL | NULL    |       |
+| title            | varchar(255) | YES  |     | NULL    |       |
+| type             | varchar(255) | YES  |     | NULL    |       |
+| description      | varchar(255) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into bugs values (201, 101, 1001, 'Bug_1', 'XYZ', 'Bug in login module');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bugs values (202, 101, 1001, 'Bug_2', 'XYZ12', 'Bug in register module');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bugs values (203, 102, 1002, 'Bug_X', 'XYZ_ABC', 'Bug in search module');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from bugs;
++--------+------------------+---------------+-------+---------+------------------------+
+| bug_id | bug_developer_id | bug_tester_id | title | type    | description            |
++--------+------------------+---------------+-------+---------+------------------------+
+|    201 |              101 |          1001 | Bug_1 | XYZ     | Bug in login module    |
+|    202 |              101 |          1001 | Bug_2 | XYZ12   | Bug in register module |
+|    203 |              102 |          1002 | Bug_X | XYZ_ABC | Bug in search module   |
++--------+------------------+---------------+-------+---------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table tasks (task_id int not null, task_name varchar(200), task_desc varchar(255), task_date date, task_assign int not null, task_status varchar(255));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc tasks;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| task_id     | int          | NO   |     | NULL    |       |
+| task_name   | varchar(200) | YES  |     | NULL    |       |
+| task_desc   | varchar(255) | YES  |     | NULL    |       |
+| task_date   | date         | YES  |     | NULL    |       |
+| task_assign | int          | NO   |     | NULL    |       |
+| task_status | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> alter table tasks add primary key(task_id);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table tasks add foreign key(task_assign) references developers(developer_id);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc tasks;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| task_id     | int          | NO   | PRI | NULL    |       |
+| task_name   | varchar(200) | YES  |     | NULL    |       |
+| task_desc   | varchar(255) | YES  |     | NULL    |       |
+| task_date   | date         | YES  |     | NULL    |       |
+| task_assign | int          | NO   | MUL | NULL    |       |
+| task_status | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into tasks values (201, 'Task_1', 'Task Description for Task_1', '2021-4-5', 101, 'Incomplete');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tasks values (202, 'Task_2', 'Task Description for Task_2', '2021-4-4', 102, 'Incomplete');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tasks values (203, 'Task_3', 'Task Description for Task_3', '2021-3-4', 103, 'Complete');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tasks values (204, 'Task_4', 'Task Description for Task_4', '2021-3-3', 102, 'Complete');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into tasks values (205, 'Task_5', 'Task Description for Task_5', '2021-3-2', 102, 'Complete');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into tasks values (206, 'Task_6', 'Task Description for Task_6', '2021-3-4', 101, 'Complete');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from tasks;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
+|     204 | Task_4    | Task Description for Task_4 | 2021-03-03 |         102 | Complete    |
+|     205 | Task_5    | Task Description for Task_5 | 2021-03-02 |         102 | Complete    |
+|     206 | Task_6    | Task Description for Task_6 | 2021-03-04 |         101 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from developers;
++--------------+----------------+------------------------+--------------------+
+| developer_id | developer_name | developer_email        | developer_password |
++--------------+----------------+------------------------+--------------------+
+|          101 | Aman           | aman12@gmail.com       | 12345              |
+|          102 | Kunal          | kunalsharma2@gmail.com | abc12345           |
+|          103 | John           | johndoe@gmail.com      | abc_john           |
++--------------+----------------+------------------------+--------------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from tasks group by task_assign;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select task_name, task_date, count(task_assign) from tasks group by task_assign;
++-----------+------------+--------------------+
+| task_name | task_date  | count(task_assign) |
++-----------+------------+--------------------+
+| Task_1    | 2021-04-05 |                  2 |
+| Task_2    | 2021-04-04 |                  3 |
+| Task_3    | 2021-03-04 |                  1 |
++-----------+------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select task_name, task_date, count(task_assign) as Task_Count from tasks group by task_assign;
++-----------+------------+------------+
+| task_name | task_date  | Task_Count |
++-----------+------------+------------+
+| Task_1    | 2021-04-05 |          2 |
+| Task_2    | 2021-04-04 |          3 |
+| Task_3    | 2021-03-04 |          1 |
++-----------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select task_name, task_date, task_assign, count(task_assign) as Task_Count from tasks group by task_assign;
++-----------+------------+-------------+------------+
+| task_name | task_date  | task_assign | Task_Count |
++-----------+------------+-------------+------------+
+| Task_1    | 2021-04-05 |         101 |          2 |
+| Task_2    | 2021-04-04 |         102 |          3 |
+| Task_3    | 2021-03-04 |         103 |          1 |
++-----------+------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select task_assign, count(task_assign) as Task_Count from tasks group by task_assign;
++-------------+------------+
+| task_assign | Task_Count |
++-------------+------------+
+|         101 |          2 |
+|         102 |          3 |
+|         103 |          1 |
++-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign;
++-------------+------------+
+| task_assign | Task_Count |
++-------------+------------+
+|         101 |          2 |
+|         102 |          3 |
+|         103 |          1 |
++-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| Aman           |         101 |          2 |
+| Kunal          |         102 |          3 |
+| John           |         103 |          1 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign order by Task_Count;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| John           |         103 |          1 |
+| Aman           |         101 |          2 |
+| Kunal          |         102 |          3 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign order by Task_Count desc;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| Kunal          |         102 |          3 |
+| Aman           |         101 |          2 |
+| John           |         103 |          1 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign order by Task_Count desc where task_status = 'Complete';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where task_status = 'Complete'' at line 1
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign having task_status = 'Complete'  order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 'task_status' in 'having clause'
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks inner join developers on tasks.task_assign = developers.developer_id  group by task_assign having task_status = 'Complete'  order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 'task_status' in 'having clause'
+mysql> select developer_name, task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on tasks.task_assign = developers.developer_id  group by task_assign having t.task_status = 'Complete'  order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 'tasks.task_assign' in 'on clause'
+mysql> select d.developer_name, t.task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on tasks.task_assign = developers.developer_id  group by t.task_assign having t.task_status = 'Complete'  order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 'tasks.task_assign' in 'on clause'
+mysql> select d.developer_name, t.task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on t.task_assign = d.developer_id  group by t.task_assign having t.task_status = 'Complete'  order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 't.task_status' in 'having clause'
+mysql> select task_assign, count(task_assign) as Task_Count from tasks group by task_assign having task_status = 'Complete';
+ERROR 1054 (42S22): Unknown column 'task_status' in 'having clause'
+mysql> select * from tasks;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
+|     204 | Task_4    | Task Description for Task_4 | 2021-03-03 |         102 | Complete    |
+|     205 | Task_5    | Task Description for Task_5 | 2021-03-02 |         102 | Complete    |
+|     206 | Task_6    | Task Description for Task_6 | 2021-03-04 |         101 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select task_assign, count(task_assign) as Task_Count from tasks group by task_assign where task_status = 'Complete';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where task_status = 'Complete'' at line 1
+mysql> select task_assign, count(task_assign) as Task_Count from tasks where task_status = 'Complete' group by task_assign;
++-------------+------------+
+| task_assign | Task_Count |
++-------------+------------+
+|         101 |          1 |
+|         102 |          2 |
+|         103 |          1 |
++-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select d.developer_name, t.task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on t.task_assign = d.developer_id where t.task_status = 'Complete'  group by t.task_assign order by Task_Count desc;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| Kunal          |         102 |          2 |
+| Aman           |         101 |          1 |
+| John           |         103 |          1 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select d.developer_name, t.task_assign, count(task_assign) as 'Completed Task Count' from tasks t inner join developers d on t.task_assign = d.developer_id where t.task_status = 'Complete'  group by t.task_assign order by Task_Count desc;
+ERROR 1054 (42S22): Unknown column 'Task_Count' in 'order clause'
+mysql> select d.developer_name, t.task_assign, count(task_assign) as 'Completed Task Count' from tasks t inner join developers d on t.task_assign = d.developer_id where t.task_status = 'Complete'  group by t.task_assign order by 'Completed Task Count' desc;
++----------------+-------------+----------------------+
+| developer_name | task_assign | Completed Task Count |
++----------------+-------------+----------------------+
+| Aman           |         101 |                    1 |
+| Kunal          |         102 |                    2 |
+| John           |         103 |                    1 |
++----------------+-------------+----------------------+
+3 rows in set (0.00 sec)
+
+mysql> select d.developer_name, t.task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on t.task_assign = d.developer_id where t.task_status = 'Complete'  group by t.task_assign order by Task_Count desc;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| Kunal          |         102 |          2 |
+| Aman           |         101 |          1 |
+| John           |         103 |          1 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select d.developer_name, t.task_assign, count(task_assign) as Task_Count from tasks t inner join developers d on t.task_assign = d.developer_id where t.task_status = 'Incomplete'  group by t.task_assign order by Task_Count desc;
++----------------+-------------+------------+
+| developer_name | task_assign | Task_Count |
++----------------+-------------+------------+
+| Aman           |         101 |          1 |
+| Kunal          |         102 |          1 |
++----------------+-------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tasks;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
+|     204 | Task_4    | Task Description for Task_4 | 2021-03-03 |         102 | Complete    |
+|     205 | Task_5    | Task Description for Task_5 | 2021-03-02 |         102 | Complete    |
+|     206 | Task_6    | Task Description for Task_6 | 2021-03-04 |         101 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from developers;
++--------------+----------------+------------------------+--------------------+
+| developer_id | developer_name | developer_email        | developer_password |
++--------------+----------------+------------------------+--------------------+
+|          101 | Aman           | aman12@gmail.com       | 12345              |
+|          102 | Kunal          | kunalsharma2@gmail.com | abc12345           |
+|          103 | John           | johndoe@gmail.com      | abc_john           |
++--------------+----------------+------------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from developers;
++--------------+----------------+------------------------+--------------------+
+| developer_id | developer_name | developer_email        | developer_password |
++--------------+----------------+------------------------+--------------------+
+|          101 | Aman           | aman12@gmail.com       | 12345              |
+|          102 | Kunal          | kunalsharma2@gmail.com | abc12345           |
+|          103 | John           | johndoe@gmail.com      | abc_john           |
++--------------+----------------+------------------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from tasks;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
+|     204 | Task_4    | Task Description for Task_4 | 2021-03-03 |         102 | Complete    |
+|     205 | Task_5    | Task Description for Task_5 | 2021-03-02 |         102 | Complete    |
+|     206 | Task_6    | Task Description for Task_6 | 2021-03-04 |         101 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select developer_id, developer_name, from developers where developer_id in (select task_assign from tasks where task_status='Complete');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from developers where developer_id in (select task_assign from tasks where task_' at line 1
+mysql> select developer_id, developer_name, from developers where developer_id in (select task_assign from tasks where task_status='Complete');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from developers where developer_id in (select task_assign from tasks where task_' at line 1
+mysql> select developer_id, developer_name, from developers where developer_id in (select task_assign from tasks);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from developers where developer_id in (select task_assign from tasks)' at line 1
+mysql> select developer_id, developer_name from developers where developer_id in (select task_assign from tasks where task_status='Complete');
++--------------+----------------+
+| developer_id | developer_name |
++--------------+----------------+
+|          101 | Aman           |
+|          102 | Kunal          |
+|          103 | John           |
++--------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select developer_id, developer_name from developers where developer_id not in (select task_assign from tasks where task_status='Complete');
+Empty set (0.00 sec)
+
+mysql> select developer_id, developer_name from developers where developer_id in (select task_assign from tasks where task_status='Incomplete');
++--------------+----------------+
+| developer_id | developer_name |
++--------------+----------------+
+|          101 | Aman           |
+|          102 | Kunal          |
++--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from tasks;
++---------+-----------+-----------------------------+------------+-------------+-------------+
+| task_id | task_name | task_desc                   | task_date  | task_assign | task_status |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+|     201 | Task_1    | Task Description for Task_1 | 2021-04-05 |         101 | Incomplete  |
+|     202 | Task_2    | Task Description for Task_2 | 2021-04-04 |         102 | Incomplete  |
+|     203 | Task_3    | Task Description for Task_3 | 2021-03-04 |         103 | Complete    |
+|     204 | Task_4    | Task Description for Task_4 | 2021-03-03 |         102 | Complete    |
+|     205 | Task_5    | Task Description for Task_5 | 2021-03-02 |         102 | Complete    |
+|     206 | Task_6    | Task Description for Task_6 | 2021-03-04 |         101 | Complete    |
++---------+-----------+-----------------------------+------------+-------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select date(now());
++-------------+
+| date(now()) |
++-------------+
+| 2021-04-13  |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select date(now()) as today_date;
++------------+
+| today_date |
++------------+
+| 2021-04-13 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2021-04-13 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(), '%d/%m/%y');
++------------------------------------+
+| date_format(curdate(), '%d/%m/%y') |
++------------------------------------+
+| 13/04/21                           |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(), '%d/%m/%y') as today_date;
++------------+
+| today_date |
++------------+
+| 13/04/21   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2021-4-13', '2021-4-1');
++-----------------------------------+
+| datediff('2021-4-13', '2021-4-1') |
++-----------------------------------+
+|                                12 |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2021-4-13', '2021-4-1') days;
++------+
+| days |
++------+
+|   12 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select '2021-4-13' start, date_add('2021-4-13', interval 1 week) 'one week later';
++-----------+----------------+
+| start     | one week later |
++-----------+----------------+
+| 2021-4-13 | 2021-04-20     |
++-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select task_date start from tasks date_add(task_date, interval 1 week) 'one week later';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date_add(task_date, interval 1 week) 'one week later'' at line 1
+mysql> select task_date start date_add(task_date, interval 1 week) 'one week later' from tasks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date_add(task_date, interval 1 week) 'one week later' from tasks' at line 1
+mysql> select task_date start, date_add(task_date, interval 1 week) 'one week later' from tasks;
++------------+----------------+
+| start      | one week later |
++------------+----------------+
+| 2021-04-05 | 2021-04-12     |
+| 2021-04-04 | 2021-04-11     |
+| 2021-03-04 | 2021-03-11     |
+| 2021-03-03 | 2021-03-10     |
+| 2021-03-02 | 2021-03-09     |
+| 2021-03-04 | 2021-03-11     |
++------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select datediff(task_date, '2021-4-1') days from tasks;
++------+
+| days |
++------+
+|    4 |
+|    3 |
+|  -28 |
+|  -29 |
+|  -30 |
+|  -28 |
++------+
+6 rows in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2021-04-13 12:36:25 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select current_time();
++----------------+
+| current_time() |
++----------------+
+| 12:36:50       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select if(5 > 10 ,'Yes', 'No');
++-------------------------+
+| if(5 > 10 ,'Yes', 'No') |
++-------------------------+
+| No                      |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select if(5 > 10 ,'Yes', 'No') as if_syntax;
++-----------+
+| if_syntax |
++-----------+
+| No        |
++-----------+
+1 row in set (0.00 sec)
