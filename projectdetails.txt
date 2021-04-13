@@ -1,0 +1,68 @@
+
+
+PPT Format
+
+1. MVP Features
+2. Check List Follow
+3. Project Business Explain
+4. Tables and (E-R)
+5. MicroServices
+6. Project Skeleton
+7. Utility
+8. Exception (System, Business)
+9. 3rd Party Library
+10. Efforts for Each Service
+
+
+
+
+Goal
+MVP
+
+
+CheckList
+1. Validations (DTO)
+2. No Native Query
+3. Every MicroService we are able to test alone, not tightly coupled.
+4. CORS
+5. Single Responsibility
+6. No JPA Entity send as a response (JPA Entity to DTO and vice-versa)
+7. All service must handle exceptions
+8. All Service must do logging.
+9. Response JSON, Request JSON , QueryString, Path Params
+10. Response Status Code
+11. Java Docs in Code
+
+
+
+Generic Things
+1. Project Structure
+
+2. Authentication & Authorisation (MicroService) Isolates from Business Logic.
+
+3. Logging Service - Common
+
+4. Mail Service
+
+5. PDF Generate Service
+
+6. Config Files
+
+
+Specific - Business 
+
+Task/Project Manager/Management Application
+
+1. Register Org (Brain Mentors) (Name, Address, WebSite, Logo) - CompanyService —> CRUD
+2. Main User / Admin User Register Before Company Creation, this user create company and invite others
+2.1  Invite Other User (Team Mates) (Mail) Registration Link Along with Reg Code
+2.2 Admin User , Provide Roles (Manager, Developer, Tester)
+2.3 Rights - Create Role, Create Right, Add New User, Right Assign
+
+Task Board 
+
+
+
+
+
+
